@@ -8,6 +8,31 @@ package Model.DAOs;
  *
  * @author uniflelias
  */
+
+import Model.Conexao;
+import Model.Usuario;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class UsuarioDAO {
-    
+
+    public boolean cadastrarUsuario(Usuario usuario) {
+        String sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
+        
+        try (Connection conn = Conexao.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+            
+            pst.setString(1, usuario.getNome());
+            pst.setString(2, usuario.getEmail());
+            pst.setString(3, usuario.getSenha());
+            
+            int rowsAffected = pst.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
+            return false;
+        }
+    }
 }
+
