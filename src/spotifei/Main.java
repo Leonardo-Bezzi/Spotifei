@@ -8,13 +8,18 @@ package spotifei;
  *
  * @author uniflelias
  */
-public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
+import Model.Conexao;
+import java.sql.Connection;
+
+public class Main {
     public static void main(String[] args) {
-        // TODO code application logic here
+        Connection connection = Conexao.getConnection();
+        if (connection != null) {
+            System.out.println("Conexão bem-sucedida ao banco de dados!");
+        } else {
+            System.out.println("Falha na conexão!");
+        }
     }
-    
 }
+
