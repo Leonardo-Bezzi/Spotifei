@@ -1,0 +1,19 @@
+# Ignora arquivos compilados
+*.class
+*.jar
+*.war
+*.ear
+
+# Pastas de build do NetBeans
+nbproject/private/
+build/
+dist/
+
+# Outras configurações locais
+*.log
+*.iml
+.idea/
+*.bat
+*.sh
+*.swp
+.DS_Store
