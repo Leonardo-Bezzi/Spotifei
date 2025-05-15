@@ -4,10 +4,12 @@
  */
 package View;
 
+import Model.DAOs.CurtidaDAO;
 import Model.DAOs.MusicaDAO;
 import Model.Musica;
-import java.util.ArrayList;
+import Model.Usuario;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,10 +21,39 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
     /**
      * Creates new form TelaBuscarMusica
      */
-    public TelaBuscarMusica() {
+    
+    private Usuario usuarioAtual;
+    
+    public TelaBuscarMusica(Usuario usuario) {
         initComponents();
+        this.usuarioAtual = usuario;
+        setTitle("SPOTIFEI - " + usuario.getNome());
+        configurarTabela();
     }
 
+    TelaBuscarMusica() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    private void configurarTabela() {
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[][]{},
+            new String[]{"ID", "Nome", "Artista", "Gênero", "Duração", "Curtida"}
+        ) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return columnIndex == 5 ? Boolean.class : Object.class;
+            }
+            
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 5; // Apenas a coluna Curtida é editável
+            }
+        };
+        
+        tblResultados.setModel(model);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,17 +89,19 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
 
         tblResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Artista", "Gênero", "Duração"
+                "ID", "Nome", "Artista", "Gênero", "Duração", "Curtida"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -141,102 +174,66 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
     }//GEN-LAST:event_tfTermoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String termo = tfTermo.getText();
+        String termo = tfTermo.getText().trim();
         String filtro = cbFiltro.getSelectedItem().toString().toLowerCase();
-        
-        MusicaDAO dao = new MusicaDAO();
-        List<Musica> resultados = dao.buscarPorCampo(filtro, termo);
+
+        if (termo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite um termo para buscar!");
+            return;
+        }
+
+        MusicaDAO musicaDAO = new MusicaDAO();
+        CurtidaDAO curtidaDAO = new CurtidaDAO();
+
+        List<Musica> resultados = musicaDAO.buscarPorCampo(filtro, termo, usuarioAtual.getId());
 
         DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
         model.setRowCount(0);
 
-        for (Musica m : resultados) {
-            model.addRow(new Object[] {
-                m.getId(),
-                m.getNome(),
-                m.getArtista(),
-                m.getGenero(),
-                m.getDuracao()
-            });
+        if (resultados.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhuma música encontrada para: " + termo);
+            return;
         }
 
+        for (Musica musica : resultados) {
+            boolean curtida = curtidaDAO.verificaCurtida(usuarioAtual.getId(), musica.getId());
+            model.addRow(new Object[]{
+                musica.getId(),
+                musica.getNome(),
+                musica.getArtista(),
+                musica.getGenero(),
+                formatarDuracao(musica.getDuracao()),
+                curtida
+            });
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
-
+    
+    private String formatarDuracao(int segundos) {
+        return String.format("%d:%02d", segundos / 60, segundos % 60);
+    }
+    
     private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
-        String termo = tfTermo.getText();
-        String filtro = cbFiltro.getSelectedItem().toString();
         
-        System.out.println(filtro);
-        
-        MusicaDAO dao = new MusicaDAO();
-        List<Musica> resultados = new ArrayList<>();
-
-        switch (filtro) {
-            case "Nome":
-                resultados = dao.buscarPorCampo("nome", termo);
-                break;
-            case "Artista":
-                resultados = dao.buscarPorCampo("artista", termo);
-                break;
-            case "Gênero":
-                resultados = dao.buscarPorCampo("genero", termo);
-                break;
-        }
-
-        DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
-        model.setRowCount(0);
-
-        for (Musica m : resultados) {
-            model.addRow(new Object[] {
-                m.getId(),
-                m.getNome(),
-                m.getArtista(),
-                m.getGenero(),
-                m.getDuracao()
-            });
-        }
-
     }//GEN-LAST:event_cbFiltroActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        new TelaPrincipal().setVisible(true); // Abre o menu principal
+        new TelaPrincipal(usuarioAtual).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
-
+    
+    
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscarMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscarMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscarMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscarMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaBuscarMusica().setVisible(true);
-            }
-        });
-    }
+    java.awt.EventQueue.invokeLater(() -> {
+        // Para teste, crie um usuário mock
+        Usuario usuarioTeste = new Usuario(1, "Teste", "teste@email.com", "");
+        new TelaBuscarMusica(usuarioTeste).setVisible(true);
+    });
+}
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

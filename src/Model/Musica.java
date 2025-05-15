@@ -8,12 +8,75 @@ package Model;
  *
  * @author uniflelias
  */
+
 public class Musica {
     private int id;
     private String nome;
     private String artista;
     private String genero;
-    private int duracao; 
+    private int duracao;
+    private boolean curtida;
+
+    public Musica(int id, String nome, String artista, String genero, int duracao, boolean curtida) {
+        this.id = id;
+        this.nome = nome;
+        this.artista = artista;
+        this.genero = genero;
+        this.duracao = duracao;
+        this.curtida = curtida;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getArtista() {
+        return artista;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public int getDuracao() {
+        return duracao;
+    }
+
+    public boolean isCurtida() {
+        return curtida;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setArtista(String artista) {
+        this.artista = artista;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public void setDuracao(int duracao) {
+        this.duracao = duracao;
+    }
+
+    public void setCurtida(boolean curtida) {
+        this.curtida = curtida;
+    }
+
+    
+    
+    public Musica() {}
 
     public Musica(int id, String nome, String artista, String genero, int duracao) {
         this.id = id;
@@ -23,52 +86,5 @@ public class Musica {
         this.duracao = duracao;
     }
 
-    public Musica() {
-    this.id = 0;  
-    this.nome = "";
-    this.artista = "";
-    this.genero = "";
-    this.duracao = 0;  
-}
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getArtista() {
-        return artista;
-    }
-
-    public void setArtista(String artista) {
-        this.artista = artista;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public int getDuracao() {
-        return duracao;
-    }
-
-    public void setDuracao(int duracao) {
-        this.duracao = duracao;
-    }
+    // Getters e Setters (omitidos por brevidade, mas devem ser implementados)
 }
