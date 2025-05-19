@@ -14,6 +14,7 @@ public class Musica {
     private String artista;
     private String genero;
     private int duracao; 
+    private boolean curtida;
 
     public Musica(int id, String nome, String artista, String genero, int duracao) {
         this.id = id;
@@ -71,4 +72,14 @@ public class Musica {
     public void setDuracao(int duracao) {
         this.duracao = duracao;
     }
+
+    public boolean isCurtida() {
+        return curtida;
+    }
+
+    public void setCurtida(boolean curtida) {
+        this.curtida = curtida;
+    }
+    
+    
 }

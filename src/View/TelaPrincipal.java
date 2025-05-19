@@ -7,6 +7,9 @@ package View;
 import Model.Usuario;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import Model.Sessao;
+import Model.Usuario;
+
 /**
  *
  * @author uniflelias
@@ -26,9 +29,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal(Usuario user) {
         initComponents();
+        Model.Sessao.setUsuario(user); // Salvamento do usuário para ações futuras
         // Saudação via título da janela
         setTitle("Spotifei – Bem-vindo, " + user.getNome() + "!");
-        // Opcional: mensagem em popup
         JOptionPane.showMessageDialog(this,
             "Olá, " + user.getNome() + "!",
             "Bem-vindo",
@@ -90,8 +93,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarMusicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMusicasActionPerformed
-        new TelaBuscarMusica().setVisible(true); // Abre a tela de busca
+        Usuario usuarioLogado = Model.Sessao.getUsuario();
+    if (usuarioLogado != null) {
+        int idUsuario = usuarioLogado.getId();
+        new TelaBuscarMusica(idUsuario).setVisible(true);
         this.dispose();
+    } else {
+        // Se não tiver usuário logado, mostrar mensagem de erro (opcional)
+        JOptionPane.showMessageDialog(this, "Usuário não está logado!", "Erro", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnBuscarMusicasActionPerformed
 
     /**

@@ -19,9 +19,31 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
     /**
      * Creates new form TelaBuscarMusica
      */
-    public TelaBuscarMusica() {
+    
+    private int idUsuario;
+    
+    public TelaBuscarMusica(int idUsuario) {
         initComponents();
-    }
+        this.idUsuario = idUsuario;
+        
+        tblResultados.getModel().addTableModelListener(e -> {
+        int row = e.getFirstRow();
+        int column = e.getColumn();
+
+        if (column == 5) {
+            DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
+            int idMusica = (Integer) model.getValueAt(row, 0);
+            boolean curtida = (Boolean) model.getValueAt(row, 5);
+
+            MusicaDAO dao = new MusicaDAO();
+            if (curtida) {
+                dao.adicionarCurtida(idUsuario, idMusica);
+            } else {
+                dao.removerCurtida(idUsuario, idMusica);
+            }
+        }
+    });
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,17 +80,17 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
 
         tblResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Artista", "Gênero", "Duração"
+                "ID", "Nome", "Artista", "Gênero", "Duração", "Curtida"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -143,27 +165,28 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String termo = tfTermo.getText();
         String filtro = cbFiltro.getSelectedItem().toString().toLowerCase();
-        
+
         String campoFiltro = switch (filtro) {
-            case "Nome" -> "nome";
-            case "Artista" -> "artista";
-            case "Gênero" -> "genero";
-            default -> "nome"; // padrão
+            case "nome" -> "nome";
+            case "artista" -> "artista";
+            case "gênero" -> "genero";
+            default -> "nome";
         };
-    
+
         MusicaDAO dao = new MusicaDAO();
-        List<Musica> resultados = dao.buscarPorCampo(campoFiltro, termo);
-    
+        List<Musica> resultados = dao.buscarPorCampo(campoFiltro, termo, idUsuario); // agora passa idUsuario
+
         DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
         model.setRowCount(0);
-    
+
         for (Musica m : resultados) {
-            model.addRow(new Object[] {
+            model.addRow(new Object[]{
                 m.getId(),
                 m.getNome(),
                 m.getArtista(),
                 m.getGenero(),
-                m.getDuracao()
+                m.getDuracao(),
+                m.isCurtida()  // exibe o boolean curtida na tabela
             });
         }   
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -173,44 +196,13 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
     }//GEN-LAST:event_cbFiltroActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        new TelaPrincipal().setVisible(true); // Abre o menu principal
+        new TelaPrincipal(Model.Sessao.getUsuario()).setVisible(true); // Abre o menu principal
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscarMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscarMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscarMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscarMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaBuscarMusica().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
