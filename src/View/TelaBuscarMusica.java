@@ -144,12 +144,19 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
         String termo = tfTermo.getText();
         String filtro = cbFiltro.getSelectedItem().toString().toLowerCase();
         
+        String campoFiltro = switch (filtro) {
+            case "Nome" -> "nome";
+            case "Artista" -> "artista";
+            case "Gênero" -> "genero";
+            default -> "nome"; // padrão
+        };
+    
         MusicaDAO dao = new MusicaDAO();
-        List<Musica> resultados = dao.buscarPorCampo(filtro, termo);
-
+        List<Musica> resultados = dao.buscarPorCampo(campoFiltro, termo);
+    
         DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
         model.setRowCount(0);
-
+    
         for (Musica m : resultados) {
             model.addRow(new Object[] {
                 m.getId(),
@@ -158,44 +165,11 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
                 m.getGenero(),
                 m.getDuracao()
             });
-        }
-
+        }   
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
-        String termo = tfTermo.getText();
-        String filtro = cbFiltro.getSelectedItem().toString();
-        
-        System.out.println(filtro);
-        
-        MusicaDAO dao = new MusicaDAO();
-        List<Musica> resultados = new ArrayList<>();
-
-        switch (filtro) {
-            case "Nome":
-                resultados = dao.buscarPorCampo("nome", termo);
-                break;
-            case "Artista":
-                resultados = dao.buscarPorCampo("artista", termo);
-                break;
-            case "Gênero":
-                resultados = dao.buscarPorCampo("genero", termo);
-                break;
-        }
-
-        DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
-        model.setRowCount(0);
-
-        for (Musica m : resultados) {
-            model.addRow(new Object[] {
-                m.getId(),
-                m.getNome(),
-                m.getArtista(),
-                m.getGenero(),
-                m.getDuracao()
-            });
-        }
-
+     
     }//GEN-LAST:event_cbFiltroActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
