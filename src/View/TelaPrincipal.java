@@ -13,13 +13,12 @@ import javax.swing.JOptionPane;
  */
 
 public class TelaPrincipal extends javax.swing.JFrame {
-    private Usuario usuarioAtual;
+
     /**
      * Construtor padrão (caso queira abrir sem login)
      */
     public TelaPrincipal() {
         initComponents();
-        setTitle("SPOTIFEI");
     }
 
     /**
@@ -27,17 +26,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal(Usuario user) {
         initComponents();
-        this.usuarioAtual = user;
-        setTitle("SPOTIFEI - " + user.getNome());
-        exibirMensagemBoasVindas(user);
-    }
-
-    private void exibirMensagemBoasVindas(Usuario user) {
+        // Saudação via título da janela
+        setTitle("Spotifei – Bem-vindo, " + user.getNome() + "!");
+        // Opcional: mensagem em popup
         JOptionPane.showMessageDialog(this,
-            "Bem-vindo, " + user.getNome() + "!",
-            "Login realizado",
+            "Olá, " + user.getNome() + "!",
+            "Bem-vindo",
             JOptionPane.INFORMATION_MESSAGE);
     }
+
+    
     
 
     /**
@@ -92,11 +90,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarMusicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMusicasActionPerformed
-        if (usuarioAtual != null) {
-            new TelaBuscarMusica(usuarioAtual).setVisible(true);
-        } else {
-            new TelaBuscarMusica().setVisible(true);
-        }
+        new TelaBuscarMusica().setVisible(true); // Abre a tela de busca
         this.dispose();
     }//GEN-LAST:event_btnBuscarMusicasActionPerformed
 

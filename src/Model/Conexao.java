@@ -14,12 +14,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao {
-    private static final String URL = "jdbc:postgresql://localhost:5432/Spotifei";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "fei";
+    private static final String URL = "jdbc:postgresql://localhost:5432/Spotifei";  // Ajuste o "localhost" e a porta conforme necessário
+    private static final String USER = "postgres";  // Usuário do PostgreSQL
+    private static final String PASSWORD = "fei";  // Senha do usuário postgres
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+    public static Connection getConnection() {
+        try {
+            return DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (SQLException e) {
+            System.out.println("Erro de conexão: " + e.getMessage());
+            return null;
+        }
     }
 }
 

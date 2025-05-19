@@ -4,28 +4,10 @@
  */
 package Controller;
 
-import Model.DAOs.UsuarioDAO;
-import Model.Usuario;
-
 /**
  *
  * @author uniflelias
  */
-
-
 public class UsuarioController {
-    private UsuarioDAO usuarioDAO;
-
-    public UsuarioController() {
-        this.usuarioDAO = new UsuarioDAO();
-    }
-
-    public boolean cadastrarUsuario(String nome, String email, String senha) {
-        Usuario novoUsuario = new Usuario(0, nome, email, senha);
-        return usuarioDAO.cadastrarUsuario(novoUsuario);
-    }
-
-    public Usuario autenticar(String email, String senha) {
-        return usuarioDAO.autenticar(email, senha);
-    }
+    
 }
