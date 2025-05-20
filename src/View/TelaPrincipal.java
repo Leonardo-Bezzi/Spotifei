@@ -52,8 +52,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabel4 = new javax.swing.JLabel();
         btnBuscarMusicas = new javax.swing.JButton();
+        btnPlaylists = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Home");
+        setResizable(false);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("SPOTIFEI");
@@ -62,6 +65,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnBuscarMusicas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarMusicasActionPerformed(evt);
+            }
+        });
+
+        btnPlaylists.setText("Playlists");
+        btnPlaylists.setMaximumSize(new java.awt.Dimension(72, 23));
+        btnPlaylists.setMinimumSize(new java.awt.Dimension(72, 23));
+        btnPlaylists.setPreferredSize(new java.awt.Dimension(72, 23));
+        btnPlaylists.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlaylistsActionPerformed(evt);
             }
         });
 
@@ -76,7 +89,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(130, 130, 130)
-                        .addComponent(btnBuscarMusicas)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnPlaylists, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarMusicas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(129, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -86,7 +101,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBuscarMusicas)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnPlaylists, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         pack();
@@ -104,46 +121,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btnBuscarMusicasActionPerformed
 
+    private void btnPlaylistsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistsActionPerformed
+        Usuario usuarioLogado = Model.Sessao.getUsuario();
+        if (usuarioLogado != null) {
+            int idUsuario = usuarioLogado.getId();
+            new TelaPlaylists(idUsuario).setVisible(true);
+            this.dispose();
+        } else {
+           JOptionPane.showMessageDialog(this, "Usuário não está logado!", "Erro", JOptionPane.ERROR_MESSAGE);
+        } 
+    }//GEN-LAST:event_btnPlaylistsActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
     
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaPrincipal().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarMusicas;
+    private javax.swing.JButton btnPlaylists;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }
