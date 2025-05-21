@@ -11,19 +11,36 @@ package Model;
 public class Playlist {
     private int id;
     private String nome;
+    private int idUsuario;
 
     public Playlist() {
     }
 
+    public Playlist(int id, String nome, int idUsuario) {
+        this.id = id;
+        this.nome = nome;
+        this.idUsuario = idUsuario;
+    }
+    
     public Playlist(int id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    
+    
     public int getId() {
         return id;
     }
 
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -35,4 +52,5 @@ public class Playlist {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 }

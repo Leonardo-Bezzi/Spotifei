@@ -4,10 +4,7 @@
  */
 package View;
 
-import Model.Usuario;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import Model.Sessao;
 import Model.Usuario;
 
 /**
@@ -16,7 +13,9 @@ import Model.Usuario;
  */
 
 public class TelaPrincipal extends javax.swing.JFrame {
-
+    
+    private static boolean mensagemMostrada = false;
+    
     /**
      * Construtor padrão (caso queira abrir sem login)
      */
@@ -30,12 +29,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal(Usuario user) {
         initComponents();
         Model.Sessao.setUsuario(user); // Salvamento do usuário para ações futuras
-        // Saudação via título da janela
-        setTitle("Spotifei – Bem-vindo, " + user.getNome() + "!");
+        setTitle("Spotifei – Bem-vindo, " + user.getNome() + "!"); // Saudação via título da janela
+        
+        if (!mensagemMostrada){
         JOptionPane.showMessageDialog(this,
             "Olá, " + user.getNome() + "!",
             "Bem-vindo",
             JOptionPane.INFORMATION_MESSAGE);
+        mensagemMostrada = true;    
+        }
     }
 
     
@@ -53,6 +55,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnBuscarMusicas = new javax.swing.JButton();
         btnPlaylists = new javax.swing.JButton();
+        btnHistorico = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home");
@@ -69,12 +72,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         btnPlaylists.setText("Playlists");
-        btnPlaylists.setMaximumSize(new java.awt.Dimension(72, 23));
-        btnPlaylists.setMinimumSize(new java.awt.Dimension(72, 23));
-        btnPlaylists.setPreferredSize(new java.awt.Dimension(72, 23));
         btnPlaylists.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlaylistsActionPerformed(evt);
+            }
+        });
+
+        btnHistorico.setText("Histórico");
+        btnHistorico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistoricoActionPerformed(evt);
             }
         });
 
@@ -88,22 +95,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnPlaylists, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBuscarMusicas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(129, Short.MAX_VALUE))
+                        .addGap(22, 22, 22)
+                        .addComponent(btnBuscarMusicas, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnPlaylists, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscarMusicas)
                 .addGap(18, 18, 18)
-                .addComponent(btnPlaylists, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPlaylists, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarMusicas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pack();
@@ -132,6 +144,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_btnPlaylistsActionPerformed
 
+    private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
+        Usuario usuarioLogado = Model.Sessao.getUsuario();
+    if (usuarioLogado != null) {
+        int idUsuario = usuarioLogado.getId();
+        new TelaHistorico(idUsuario).setVisible(true);
+        this.dispose();  
+    } else {
+        JOptionPane.showMessageDialog(this, "Usuário não está logado!", "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btnHistoricoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -140,6 +163,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarMusicas;
+    private javax.swing.JButton btnHistorico;
     private javax.swing.JButton btnPlaylists;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables

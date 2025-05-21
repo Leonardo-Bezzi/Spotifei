@@ -97,17 +97,18 @@ public class TelaCadastro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(65, 65, 65)
-                        .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(47, 47, 47))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblSenha)
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnCadastrar)
+                                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnLogin))
+                                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,10 +123,13 @@ public class TelaCadastro extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
@@ -140,9 +144,9 @@ public class TelaCadastro extends javax.swing.JFrame {
                     .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrar)
-                    .addComponent(btnLogin))
-                .addContainerGap(73, Short.MAX_VALUE))
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,28 +157,30 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_tfNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // 1. Pega os dados digitados nos campos
-        String nome = tfNome.getText();
-        String email = tfEmail.getText();
-        String senha = new String(pfSenha.getPassword());
+        String nome = tfNome.getText().trim();
+    String email = tfEmail.getText().trim();
+    String senha = new String(pfSenha.getPassword()).trim();
 
-        // 2. Cria um objeto Usuario
-        Usuario novoUsuario = new Usuario(0, nome, email, senha); // O ID pode ser 0 se for auto increment
+    if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+        JOptionPane.showMessageDialog(this, 
+            "Por favor, preencha todos os campos (Nome, Email e Senha).", 
+            "Erro de validação", 
+            JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-        // 3. Usa o DAO para salvar no banco
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        boolean sucesso = usuarioDAO.cadastrarUsuario(novoUsuario);
+    Usuario novoUsuario = new Usuario(0, nome, email, senha);
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
+    boolean sucesso = usuarioDAO.cadastrarUsuario(novoUsuario);
 
-        // 4. Dá um feedback pro usuário
-        if (sucesso) {
-            JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
-            // opcional: limpar os campos
-            tfNome.setText("");
-            tfEmail.setText("");
-            pfSenha.setText("");
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar usuário. Verifique os dados e tente novamente.");
-        }
+    if (sucesso) {
+        JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
+        tfNome.setText("");
+        tfEmail.setText("");
+        pfSenha.setText("");
+    } else {
+        JOptionPane.showMessageDialog(this, "Erro ao cadastrar usuário. Verifique os dados e tente novamente.");
+    }
 
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

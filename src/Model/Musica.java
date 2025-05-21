@@ -25,14 +25,24 @@ public class Musica {
     }
 
     public Musica() {
-    this.id = 0;  
-    this.nome = "";
-    this.artista = "";
-    this.genero = "";
-    this.duracao = 0;  
-}
+        this.id = 0;  
+        this.nome = "";
+        this.artista = "";
+        this.genero = "";
+        this.duracao = 0;  
+    }
+
+    public Musica(int id, String nome, String artista, String genero, int duracao, boolean curtida) {
+        this.id = id;
+        this.nome = nome;
+        this.artista = artista;
+        this.genero = genero;
+        this.duracao = duracao;
+        this.curtida = curtida;
+    }
 
 
+    
     public int getId() {
         return id;
     }

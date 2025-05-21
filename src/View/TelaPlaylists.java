@@ -40,11 +40,6 @@ public class TelaPlaylists extends javax.swing.JFrame {
         }
         listaPlaylists.setModel(model);
     }
-    
-    
-    public JButton getBtnAdicionarMusica() {
-        return btnAdicionarMusica;
-    }
 
     public JButton getBtnCriar() {
         return btnCriar;
@@ -58,20 +53,12 @@ public class TelaPlaylists extends javax.swing.JFrame {
         return btnExcluir;
     }
 
-    public JButton getBtnRemoverMusica() {
-        return btnRemoverMusica;
-    }
-
     public JButton getBtnVerMusicas() {
         return btnVerMusicas;
     }
 
     public JButton getBtnVoltar() {
         return btnVoltar;
-    }
-
-    public JPanel getjPanel1() {
-        return jPanel1;
     }
 
     public JScrollPane getjScrollPane1() {
@@ -82,9 +69,6 @@ public class TelaPlaylists extends javax.swing.JFrame {
         return listaPlaylists;
     }
 
-    public void setBtnAdicionarMusica(JButton btnAdicionarMusica) {
-        this.btnAdicionarMusica = btnAdicionarMusica;
-    }
 
     public void setBtnCriar(JButton btnCriar) {
         this.btnCriar = btnCriar;
@@ -98,9 +82,6 @@ public class TelaPlaylists extends javax.swing.JFrame {
         this.btnExcluir = btnExcluir;
     }
 
-    public void setBtnRemoverMusica(JButton btnRemoverMusica) {
-        this.btnRemoverMusica = btnRemoverMusica;
-    }
 
     public void setBtnVerMusicas(JButton btnVerMusicas) {
         this.btnVerMusicas = btnVerMusicas;
@@ -108,10 +89,6 @@ public class TelaPlaylists extends javax.swing.JFrame {
 
     public void setBtnVoltar(JButton btnVoltar) {
         this.btnVoltar = btnVoltar;
-    }
-
-    public void setjPanel1(JPanel jPanel1) {
-        this.jPanel1 = jPanel1;
     }
 
     public void setjScrollPane1(JScrollPane jScrollPane1) {
@@ -133,78 +110,18 @@ public class TelaPlaylists extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        btnCriar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
-        btnVerMusicas = new javax.swing.JButton();
-        btnAdicionarMusica = new javax.swing.JButton();
-        btnRemoverMusica = new javax.swing.JButton();
-        btnVoltar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaPlaylists = new javax.swing.JList<>();
+        btnVoltar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        btnExcluir = new javax.swing.JButton();
+        btnVerMusicas = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnCriar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciar Playlists");
         setResizable(false);
-
-        jPanel1.setLayout(new java.awt.GridLayout(4, 2));
-
-        btnCriar.setText("Criar playlist");
-        btnCriar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCriarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCriar);
-
-        btnEditar.setText("Renomear playlist");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnEditar);
-
-        btnExcluir.setText("Excluir playlist");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnExcluir);
-
-        btnVerMusicas.setText("Ver músicas");
-        btnVerMusicas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerMusicasActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnVerMusicas);
-
-        btnAdicionarMusica.setText("Adicionar música");
-        btnAdicionarMusica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarMusicaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnAdicionarMusica);
-
-        btnRemoverMusica.setText("Remover música");
-        btnRemoverMusica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverMusicaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnRemoverMusica);
-
-        btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnVoltar);
 
         listaPlaylists.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -213,56 +130,181 @@ public class TelaPlaylists extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaPlaylists);
 
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel4.setText("SPOTIFEI");
+
+        btnExcluir.setText("Excluir playlist");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnVerMusicas.setText("Ver músicas");
+        btnVerMusicas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerMusicasActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Renomear playlist");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnCriar.setText("Criar playlist");
+        btnCriar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCriarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCriar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVerMusicas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 33, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(btnVoltar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(176, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVerMusicas, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
-        // TODO add your handling code here:
+        String nome = javax.swing.JOptionPane.showInputDialog(this, "Digite o nome da nova playlist:");
+
+    if (nome != null && !nome.trim().isEmpty()) {
+        Playlist novaPlaylist = new Playlist();
+        novaPlaylist.setNome(nome.trim());
+        novaPlaylist.setIdUsuario(idUsuario); // usa o ID do usuário logado
+
+        PlaylistDAO dao = new PlaylistDAO();
+        boolean sucesso = dao.criarPlaylist(novaPlaylist);
+
+        if (sucesso) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Playlist criada com sucesso!");
+            carregarPlaylists(); // Atualiza a lista
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao criar a playlist.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "Nome da playlist não pode ser vazio.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+    }
     }//GEN-LAST:event_btnCriarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        int indiceSelecionado = listaPlaylists.getSelectedIndex();
+        if (indiceSelecionado == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma playlist para renomear.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        PlaylistDAO dao = new PlaylistDAO();
+        List<Playlist> playlists = dao.listarPorUsuario(idUsuario);
+        Playlist playlistSelecionada = playlists.get(indiceSelecionado);
+
+        String novoNome = javax.swing.JOptionPane.showInputDialog(this, "Digite o novo nome para a playlist:", playlistSelecionada.getNome());
+
+        if (novoNome != null && !novoNome.trim().isEmpty()) {
+            playlistSelecionada.setNome(novoNome.trim());
+
+            boolean sucesso = dao.renomearPlaylist(playlistSelecionada);
+
+            if (sucesso) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Playlist renomeada com sucesso!");
+                carregarPlaylists();
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao renomear a playlist.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Nome da playlist não pode ser vazio.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        int selectedIndex = listaPlaylists.getSelectedIndex();
+        if (selectedIndex == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma playlist para excluir.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir a playlist selecionada?", "Confirmar exclusão", javax.swing.JOptionPane.YES_NO_OPTION);
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            PlaylistDAO dao = new PlaylistDAO();
+            Playlist playlistSelecionada = dao.listarPorUsuario(idUsuario).get(selectedIndex); // pega a playlist completa pelo índice
+
+            boolean sucesso = dao.excluirPlaylist(playlistSelecionada.getId());
+            if (sucesso) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Playlist excluída com sucesso!");
+                carregarPlaylists();
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao excluir a playlist.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnVerMusicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMusicasActionPerformed
-        // TODO add your handling code here:
+        int indiceSelecionado = listaPlaylists.getSelectedIndex();
+        if (indiceSelecionado == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma playlist para ver as músicas.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        PlaylistDAO dao = new PlaylistDAO();
+        List<Playlist> playlists = dao.listarPorUsuario(idUsuario);
+        int idPlaylistSelecionada = playlists.get(indiceSelecionado).getId();
+
+        TelaMusicasPlaylist telaMusicas = new TelaMusicasPlaylist(idPlaylistSelecionada, idUsuario);
+        telaMusicas.setVisible(true);
+        this.dispose();
+
     }//GEN-LAST:event_btnVerMusicasActionPerformed
-
-    private void btnAdicionarMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarMusicaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAdicionarMusicaActionPerformed
-
-    private void btnRemoverMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverMusicaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRemoverMusicaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         new TelaPrincipal(Model.Sessao.getUsuario()).setVisible(true); // Abre o menu principal
@@ -275,14 +317,12 @@ public class TelaPlaylists extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdicionarMusica;
     private javax.swing.JButton btnCriar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnRemoverMusica;
     private javax.swing.JButton btnVerMusicas;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> listaPlaylists;
     // End of variables declaration//GEN-END:variables
