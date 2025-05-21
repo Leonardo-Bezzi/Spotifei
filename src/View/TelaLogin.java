@@ -139,6 +139,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_pfSenhaActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        //Realiza o login
         String email = tfEmail.getText();
         String senha = new String(pfSenha.getPassword());
 
@@ -146,7 +147,6 @@ public class TelaLogin extends javax.swing.JFrame {
         Usuario user = dao.autenticar(email, senha);
 
         if (user != null) {
-            // login OK: abre a tela principal e fecha o login
             new TelaPrincipal(user).setVisible(true);
             this.dispose();
         } else {

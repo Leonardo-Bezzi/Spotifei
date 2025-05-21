@@ -30,7 +30,7 @@ public class TelaPlaylists extends javax.swing.JFrame {
         carregarPlaylists();
     }
 
-    private void carregarPlaylists() {
+    private void carregarPlaylists() { //Lista as playlists do usuario
         PlaylistDAO dao = new PlaylistDAO();
         List<Playlist> playlists = dao.listarPorUsuario(idUsuario);
 
@@ -217,28 +217,30 @@ public class TelaPlaylists extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
+        //Cria uma nova playlist
         String nome = javax.swing.JOptionPane.showInputDialog(this, "Digite o nome da nova playlist:");
 
-    if (nome != null && !nome.trim().isEmpty()) {
-        Playlist novaPlaylist = new Playlist();
-        novaPlaylist.setNome(nome.trim());
-        novaPlaylist.setIdUsuario(idUsuario); // usa o ID do usuário logado
+        if (nome != null && !nome.trim().isEmpty()) {
+            Playlist novaPlaylist = new Playlist();
+            novaPlaylist.setNome(nome.trim());
+            novaPlaylist.setIdUsuario(idUsuario); // usa o ID do usuário logado
 
-        PlaylistDAO dao = new PlaylistDAO();
-        boolean sucesso = dao.criarPlaylist(novaPlaylist);
+            PlaylistDAO dao = new PlaylistDAO();
+            boolean sucesso = dao.criarPlaylist(novaPlaylist);
 
-        if (sucesso) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Playlist criada com sucesso!");
-            carregarPlaylists(); // Atualiza a lista
+            if (sucesso) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Playlist criada com sucesso!");
+                carregarPlaylists(); // Atualiza a lista
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao criar a playlist.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao criar a playlist.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Nome da playlist não pode ser vazio.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Nome da playlist não pode ser vazio.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
-    }
     }//GEN-LAST:event_btnCriarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        //Edita o nome da playlist
         int indiceSelecionado = listaPlaylists.getSelectedIndex();
         if (indiceSelecionado == -1) {
             javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma playlist para renomear.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
@@ -268,6 +270,7 @@ public class TelaPlaylists extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        //Remove a playlit selecionada
         int selectedIndex = listaPlaylists.getSelectedIndex();
         if (selectedIndex == -1) {
             javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma playlist para excluir.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
@@ -290,6 +293,7 @@ public class TelaPlaylists extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnVerMusicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMusicasActionPerformed
+        //Leva a tela de manipulação das musicas da playlist selecionada
         int indiceSelecionado = listaPlaylists.getSelectedIndex();
         if (indiceSelecionado == -1) {
             javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma playlist para ver as músicas.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);

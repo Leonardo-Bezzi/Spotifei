@@ -122,18 +122,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarMusicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMusicasActionPerformed
+        //Leva a tela de busca
         Usuario usuarioLogado = Model.Sessao.getUsuario();
-    if (usuarioLogado != null) {
-        int idUsuario = usuarioLogado.getId();
-        new TelaBuscarMusica(idUsuario).setVisible(true);
-        this.dispose();
-    } else {
-        // Se não tiver usuário logado, mostrar mensagem de erro (opcional)
-        JOptionPane.showMessageDialog(this, "Usuário não está logado!", "Erro", JOptionPane.ERROR_MESSAGE);
-    }
+        if (usuarioLogado != null) {
+            int idUsuario = usuarioLogado.getId();
+            new TelaBuscarMusica(idUsuario).setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuário não está logado!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarMusicasActionPerformed
 
     private void btnPlaylistsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistsActionPerformed
+        //Leva a tela das playlists
         Usuario usuarioLogado = Model.Sessao.getUsuario();
         if (usuarioLogado != null) {
             int idUsuario = usuarioLogado.getId();
@@ -145,14 +146,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPlaylistsActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
+        //Leva a pagina de historico
         Usuario usuarioLogado = Model.Sessao.getUsuario();
-    if (usuarioLogado != null) {
-        int idUsuario = usuarioLogado.getId();
-        new TelaHistorico(idUsuario).setVisible(true);
-        this.dispose();  
-    } else {
-        JOptionPane.showMessageDialog(this, "Usuário não está logado!", "Erro", JOptionPane.ERROR_MESSAGE);
-    }
+        if (usuarioLogado != null) {
+            int idUsuario = usuarioLogado.getId();
+            new TelaHistorico(idUsuario).setVisible(true);
+            this.dispose();  
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuário não está logado!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnHistoricoActionPerformed
 
     /**

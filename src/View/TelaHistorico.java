@@ -26,7 +26,7 @@ public class TelaHistorico extends javax.swing.JFrame {
         carregarHistoricos();
     }
     
-    private void carregarHistoricos() {
+    private void carregarHistoricos() { //Carrega os históricos
         List<String> buscas = Controller.HistoricoController.getHistoricoBuscas(idUsuario);
         DefaultListModel<String> modelBuscas = new DefaultListModel<>();
         for (String termo : buscas) {

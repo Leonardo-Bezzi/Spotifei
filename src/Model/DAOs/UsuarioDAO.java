@@ -18,7 +18,7 @@ import java.sql.SQLException;
 
 public class UsuarioDAO {
 
-    public boolean cadastrarUsuario(Usuario usuario) {
+    public boolean cadastrarUsuario(Usuario usuario) {  //Cadastra o usuario
         String sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
         
         try (Connection conn = Conexao.getConnection();
@@ -36,7 +36,7 @@ public class UsuarioDAO {
         }
     }
     
-    public Usuario autenticar(String email, String senha) {
+    public Usuario autenticar(String email, String senha) { //Realiza o processo de autenticação do usuario
     String sql = "SELECT id, nome, email, senha FROM usuarios WHERE email = ? AND senha = ?";
     try (Connection conn = Conexao.getConnection();
          PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -46,7 +46,6 @@ public class UsuarioDAO {
         ResultSet rs = pst.executeQuery();
         
         if (rs.next()) {
-            // se encontrou, retorna um objeto Usuario
             return new Usuario(
                 rs.getInt("id"),
                 rs.getString("nome"),
@@ -57,7 +56,7 @@ public class UsuarioDAO {
     } catch (SQLException e) {
         System.out.println("Erro na autenticação: " + e.getMessage());
     }
-    return null;  // não encontrou ou erro
+    return null;  
 }
 
 }

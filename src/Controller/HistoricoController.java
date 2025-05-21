@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class HistoricoController {
     
-    public static void registrarBusca(int idUsuario, String termoBusca) {
+    public static void registrarBusca(int idUsuario, String termoBusca) { //Registra na table a pesquisa feita
         String sql = "INSERT INTO historico_buscas (id_usuario, termo_busca) VALUES (?, ?)";
 
         try (Connection conn = Conexao.getConnection();
@@ -31,7 +31,7 @@ public class HistoricoController {
         }
     }
     
-    public static void registrarCurtida(int idUsuario, int idMusica, boolean curtida) {
+    public static void registrarCurtida(int idUsuario, int idMusica, boolean curtida) { //Registra na table as curtidas
         String sql = "INSERT INTO historico_curtidas (id_usuario, id_musica, curtida) VALUES (?, ?, ?)";
 
 
@@ -48,30 +48,8 @@ public class HistoricoController {
         }
     }
 
-    
-    public static List<CurtidaInfo> getHistoricoCurtidas(int idUsuario) {
-    List<CurtidaInfo> historicoCurtidas = new ArrayList<>();
-        String sql = "SELECT m.nome, c.curtida FROM historico_curtidas c JOIN musicas m ON c.id_musica = m.id WHERE c.id_usuario = ?";
 
-        try (Connection conn = Conexao.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, idUsuario);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                String nomeMusica = rs.getString("nome");  // <--- aqui está o ajuste
-                boolean curtida = rs.getBoolean("curtida");
-                historicoCurtidas.add(new CurtidaInfo(nomeMusica, curtida));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return historicoCurtidas;
-    }
-
-
-    public static List<String> getHistoricoBuscas(int idUsuario) {
+    public static List<String> getHistoricoBuscas(int idUsuario) { //Pega historico de buscas para uso
         List<String> historicoBuscas = new ArrayList<>();
         String sql = "SELECT termo_busca FROM historico_buscas WHERE id_usuario = ?";
 

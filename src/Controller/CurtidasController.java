@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CurtidasController {
 
-    public static List<CurtidaInfo> getHistoricoCurtidas(int idUsuario) {
+    public static List<CurtidaInfo> getHistoricoCurtidas(int idUsuario) { //Pega o historico de curtidas para uso
         List<CurtidaInfo> historicoCurtidas = new ArrayList<>();
         String sql = "SELECT m.nome, c.curtida FROM historico_curtidas c JOIN musicas m ON c.id_musica = m.id WHERE c.id_usuario = ?";
 

@@ -13,11 +13,11 @@ import java.sql.*;
  */
 
 public class CurtidaDAO {
-    public boolean curtirMusica(int idUsuario, int idMusica) {
+    public boolean curtirMusica(int idUsuario, int idMusica) { //Funcao que reliza a curtida manipulando a tabela sql
         String sql = "INSERT INTO curtidas (id_usuario, id_musica, curtida) VALUES (?, ?, true) "
                    + "ON CONFLICT (id_usuario, id_musica) DO UPDATE SET curtida = true";
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+            PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setInt(1, idUsuario);
             pst.setInt(2, idMusica);
             boolean sucesso = pst.executeUpdate() > 0;
@@ -31,10 +31,10 @@ public class CurtidaDAO {
         }
     }
 
-    public boolean descurtirMusica(int idUsuario, int idMusica) {
+    public boolean descurtirMusica(int idUsuario, int idMusica) { //Funcao que reliza a descurtida manipulando a tabela sql
         String sql = "UPDATE curtidas SET curtida = false WHERE id_usuario = ? AND id_musica = ?";
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+            PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setInt(1, idUsuario);
             pst.setInt(2, idMusica);
             boolean sucesso = pst.executeUpdate() > 0;
@@ -48,10 +48,10 @@ public class CurtidaDAO {
         }
     }
 
-    public boolean verificaCurtida(int idUsuario, int idMusica) {
+    public boolean verificaCurtida(int idUsuario, int idMusica) { //Verifica as curtidas para uso
         String sql = "SELECT curtida FROM curtidas WHERE id_usuario = ? AND id_musica = ?";
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+            PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setInt(1, idUsuario);
             pst.setInt(2, idMusica);
             ResultSet rs = pst.executeQuery();

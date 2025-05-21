@@ -28,7 +28,7 @@ public class TelaMusicasPlaylist extends javax.swing.JFrame {
         carregarMusicas();
     }
     
-    private void carregarMusicas() {
+    private void carregarMusicas() { //Carrega as musicas da playlist (tive que sorescrever a editabilidade das colunas para manter a simplicidade)
         MusicaDAO dao = new MusicaDAO();
         List<Musica> musicas = dao.listarPorPlaylist(idPlaylist, idUsuario);
 
@@ -202,6 +202,7 @@ public class TelaMusicasPlaylist extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnAdicionarMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarMusicaActionPerformed
+        //Adiciona a musica na playlist
         String input = JOptionPane.showInputDialog(this, "Digite o ID da música para adicionar à playlist:");
         if (input != null && !input.isEmpty()) {
             try {
@@ -221,6 +222,7 @@ public class TelaMusicasPlaylist extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarMusicaActionPerformed
 
     private void btnRemoverMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverMusicaActionPerformed
+        //Remove a musica na playlist
         String input = JOptionPane.showInputDialog(this, "Digite o ID da música para remover da playlist:");
         if (input != null && !input.isEmpty()) {
             try {

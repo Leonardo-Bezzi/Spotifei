@@ -157,30 +157,31 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_tfNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        //Cadastra (nao dá pra criar usuario vazio)
         String nome = tfNome.getText().trim();
-    String email = tfEmail.getText().trim();
-    String senha = new String(pfSenha.getPassword()).trim();
+        String email = tfEmail.getText().trim();
+        String senha = new String(pfSenha.getPassword()).trim();
 
-    if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
-        JOptionPane.showMessageDialog(this, 
-            "Por favor, preencha todos os campos (Nome, Email e Senha).", 
-            "Erro de validação", 
-            JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+        if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                "Por favor, preencha todos os campos (Nome, Email e Senha).", 
+                "Erro de validação", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    Usuario novoUsuario = new Usuario(0, nome, email, senha);
-    UsuarioDAO usuarioDAO = new UsuarioDAO();
-    boolean sucesso = usuarioDAO.cadastrarUsuario(novoUsuario);
+        Usuario novoUsuario = new Usuario(0, nome, email, senha);
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        boolean sucesso = usuarioDAO.cadastrarUsuario(novoUsuario);
 
-    if (sucesso) {
-        JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
-        tfNome.setText("");
-        tfEmail.setText("");
-        pfSenha.setText("");
-    } else {
-        JOptionPane.showMessageDialog(this, "Erro ao cadastrar usuário. Verifique os dados e tente novamente.");
-    }
+        if (sucesso) {
+            JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
+            tfNome.setText("");
+            tfEmail.setText("");
+            pfSenha.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar usuário. Verifique os dados e tente novamente.");
+        }
 
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

@@ -20,7 +20,7 @@ public class HistoricoDAO {
         this.conn = conn;
     }
 
-    public void registrarBusca(int idUsuario, String termoBusca) throws SQLException {
+    public void registrarBusca(int idUsuario, String termoBusca) throws SQLException { //Registra a buca
         String sqlInsert = "INSERT INTO historico_buscas (id_usuario, termo_busca) VALUES (?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
             ps.setInt(1, idUsuario);
@@ -30,7 +30,7 @@ public class HistoricoDAO {
     }
 
 
-    public List<String> listarUltimasBuscas(int idUsuario) throws SQLException {
+    public List<String> listarUltimasBuscas(int idUsuario) throws SQLException { //Pega o historico recente de buscas
         List<String> buscas = new ArrayList<>();
         String sql = "SELECT termo_busca FROM historico_buscas WHERE id_usuario = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -45,7 +45,7 @@ public class HistoricoDAO {
 
 
 
-    public void registrarCurtida(int idUsuario, int idMusica, boolean curtida) throws SQLException {
+    public void registrarCurtida(int idUsuario, int idMusica, boolean curtida) throws SQLException { //Registra a curtida
         String sqlSelect = "SELECT id FROM historico_curtidas WHERE id_usuario = ? AND id_musica = ?";
         try (PreparedStatement psSelect = conn.prepareStatement(sqlSelect)) {
             psSelect.setInt(1, idUsuario);
@@ -73,7 +73,7 @@ public class HistoricoDAO {
         }
     }
 
-    public List<Integer> listarMusicasPorCurtida(int idUsuario, boolean curtida) throws SQLException {
+    public List<Integer> listarMusicasPorCurtida(int idUsuario, boolean curtida) throws SQLException { //Captura as musicas curtidas
         List<Integer> musicas = new ArrayList<>();
         String sql = "SELECT id_musica FROM historico_curtidas WHERE id_usuario = ? AND curtida = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {

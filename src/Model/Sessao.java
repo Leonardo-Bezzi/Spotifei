@@ -8,7 +8,7 @@ package Model;
  *
  * @author uniflelias
  */
-public class Sessao {
+public class Sessao { //Usei para registrar o usuario que está usando o app no momento
     private static Usuario usuarioLogado;
 
     public static void setUsuario(Usuario user) {

@@ -12,8 +12,7 @@ import java.util.List;
  */
 public class MusicaDAO {
 
-    // Método que busca por qualquer campo (nome, artista, gênero)
-    public List<Musica> buscarPorCampo(String campo, String termo, int idUsuario) {
+    public List<Musica> buscarPorCampo(String campo, String termo, int idUsuario) { // Método que busca por qualquer campo (nome, artista, gênero)
         List<Musica> musicas = new ArrayList<>();
 
         if (!List.of("nome", "artista", "genero").contains(campo)) return musicas;
@@ -55,7 +54,7 @@ public class MusicaDAO {
     }
 
     
-    public void adicionarHistoricoBusca(int idUsuario, String termo) {
+    public void adicionarHistoricoBusca(int idUsuario, String termo) { //Adiciona o historico na table
         String sql = "INSERT INTO historico_buscas (id_usuario, termo_busca) VALUES (?, ?)";
 
         try (Connection conn = Conexao.getConnection();
@@ -69,7 +68,7 @@ public class MusicaDAO {
     }
 
     
-    public void adicionarCurtida(int idUsuario, int idMusica) {
+    public void adicionarCurtida(int idUsuario, int idMusica) { //Adiciona a musica na tabela de curtidas
         String sql = "INSERT INTO curtidas (id_usuario, id_musica, curtida) VALUES (?, ?, true) ON CONFLICT DO NOTHING";
 
         try (Connection conn = Conexao.getConnection();
@@ -78,15 +77,14 @@ public class MusicaDAO {
             pst.setInt(2, idMusica);
             pst.executeUpdate();
 
-            // Aqui adiciona registro no histórico de curtidas
-            adicionarHistoricoCurtida(idUsuario, idMusica, true);
+            adicionarHistoricoCurtida(idUsuario, idMusica, true); //Registra no histórico
 
         } catch (SQLException e) {
             System.out.println("Erro ao adicionar curtida: " + e.getMessage());
         }
     }
 
-    public void adicionarHistoricoCurtida(int idUsuario, int idMusica, boolean curtida) {
+    public void adicionarHistoricoCurtida(int idUsuario, int idMusica, boolean curtida) { //Insere historico de curtidas
         String sql = "INSERT INTO historico_curtidas (id_usuario, id_musica, curtida) VALUES (?, ?, ?)";
 
         try (Connection conn = Conexao.getConnection();
@@ -101,7 +99,7 @@ public class MusicaDAO {
     }
 
     
-    public void removerCurtida(int idUsuario, int idMusica) {
+    public void removerCurtida(int idUsuario, int idMusica) { //Remove a curtida "descurte"
         String sql = "DELETE FROM curtidas WHERE id_usuario = ? AND id_musica = ?";
 
         try (Connection conn = Conexao.getConnection();
@@ -110,8 +108,7 @@ public class MusicaDAO {
             pst.setInt(2, idMusica);
             pst.executeUpdate();
 
-            // Aqui adiciona registro no histórico de descurtidas
-            adicionarHistoricoCurtida(idUsuario, idMusica, false);
+            adicionarHistoricoCurtida(idUsuario, idMusica, false);//Registra no histórico
 
         } catch (SQLException e) {
             System.out.println("Erro ao remover curtida: " + e.getMessage());
@@ -119,7 +116,7 @@ public class MusicaDAO {
     }
 
     
-    public List<Musica> listarPorPlaylist(int idPlaylist, int idUsuario) {
+    public List<Musica> listarPorPlaylist(int idPlaylist, int idUsuario) { //Retorna as musicas da playlist 
         List<Musica> musicas = new ArrayList<>();
         String sql = """
             SELECT m.*, 
@@ -156,7 +153,7 @@ public class MusicaDAO {
         return musicas;
     }
     
-    public boolean adicionarMusicaNaPlaylist(int idMusica, int idPlaylist, int idUsuario) {
+    public boolean adicionarMusicaNaPlaylist(int idMusica, int idPlaylist, int idUsuario) { //Insere as musicas selecionadas na playlist
         String sql = "INSERT INTO playlist_musicas (playlist_id, musica_id, usuario_id) VALUES (?, ?, ?)";
 
         try (Connection conn = Conexao.getConnection();
@@ -172,7 +169,7 @@ public class MusicaDAO {
         }
     }
     
-    public boolean removerMusicaDaPlaylist(int idMusica, int idPlaylist, int idUsuario) {
+    public boolean removerMusicaDaPlaylist(int idMusica, int idPlaylist, int idUsuario) {  //Remove as musicas selecionadas da playlist
         String sql = "DELETE FROM playlist_musicas WHERE playlist_id = ? AND musica_id = ? AND usuario_id = ?";
 
         try (Connection conn = Conexao.getConnection();

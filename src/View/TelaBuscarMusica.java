@@ -22,7 +22,7 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
     
     private int idUsuario;
     
-    public TelaBuscarMusica(int idUsuario) {
+    public TelaBuscarMusica(int idUsuario) { //Gerencia os dados
         initComponents();
         this.idUsuario = idUsuario;
         
@@ -177,6 +177,7 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
     }//GEN-LAST:event_tfTermoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        //Faz a usca de acordo com o filtro selecionado
         String termo = tfTermo.getText();
         String filtro = cbFiltro.getSelectedItem().toString().toLowerCase();
 
@@ -188,7 +189,7 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
         };
 
         MusicaDAO dao = new MusicaDAO();
-        List<Musica> resultados = dao.buscarPorCampo(campoFiltro, termo, idUsuario); // agora passa idUsuario
+        List<Musica> resultados = dao.buscarPorCampo(campoFiltro, termo, idUsuario);
 
         DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
         model.setRowCount(0);
@@ -200,7 +201,7 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
                 m.getArtista(),
                 m.getGenero(),
                 m.getDuracao(),
-                m.isCurtida()  // exibe o boolean curtida na tabela
+                m.isCurtida()  
             });
         }   
     }//GEN-LAST:event_btnBuscarActionPerformed

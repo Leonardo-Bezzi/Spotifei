@@ -19,7 +19,7 @@ import java.util.List;
  * @author Gamer
  */
 public class PlaylistDAO {
-    public List<Playlist> listarPorUsuario(int idUsuario) {
+    public List<Playlist> listarPorUsuario(int idUsuario) {  //Lista as playlists do user logado
         List<Playlist> playlists = new ArrayList<>();
         String sql = "SELECT id, nome FROM playlists WHERE usuario_id = ?";
 
@@ -43,7 +43,7 @@ public class PlaylistDAO {
         return playlists;
     }
     
-    public boolean criarPlaylist(Playlist playlist) {
+    public boolean criarPlaylist(Playlist playlist) {  //Cria uma nova playlist
         String sql = "INSERT INTO playlists (nome, usuario_id) VALUES (?, ?)";
 
         try (Connection conn = Conexao.getConnection();
@@ -70,7 +70,7 @@ public class PlaylistDAO {
         }
     }
 
-    public boolean excluirPlaylist(int idPlaylist) {
+    public boolean excluirPlaylist(int idPlaylist) {  //Exclui a playlist selecionada
         String sql = "DELETE FROM playlists WHERE id = ?";
         try (Connection conn = Conexao.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -85,7 +85,7 @@ public class PlaylistDAO {
         }
     }
     
-    public boolean renomearPlaylist(Playlist playlist) {
+    public boolean renomearPlaylist(Playlist playlist) {  //Renomeia a playlist selecionada
         String sql = "UPDATE playlists SET nome = ? WHERE id = ?";
         try (Connection conn = Conexao.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -99,7 +99,7 @@ public class PlaylistDAO {
         }
     }
 
-    public List<Musica> listarMusicasPorPlaylist(int idPlaylist) {
+    public List<Musica> listarMusicasPorPlaylist(int idPlaylist) { //Lista as musicas da playlist
         List<Musica> musicas = new ArrayList<>();
         String sql = "SELECT m.id, m.nome, m.duracao, m.genero FROM musicas m "
                    + "JOIN playlist_musicas pm ON m.id = pm.id_musica WHERE pm.id_playlist = ?";
