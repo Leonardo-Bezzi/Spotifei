@@ -30,9 +30,7 @@ public class Playlist {
     public int getIdUsuario() {
         return idUsuario;
     }
-
-    
-    
+ 
     public int getId() {
         return id;
     }
