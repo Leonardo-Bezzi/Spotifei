@@ -35,6 +35,18 @@ O backup do banco de dados está disponível na raiz do projeto em formato `.bac
 
 ## Como Executar
 
+## Executável
+
+O arquivo `.jar` gerado pode ser encontrado em:
+
+`/executavel/Spotifei.jar`
+
+Para executá-lo, é necessário ter o Java instalado. Você pode rodar o programa pelo terminal com o comando:
+
+java -jar Spotifei.jar
+
+ou:
+
 1. Clone o repositório:
    ```bash
    git clone https://github.com/seu-usuario/spotifei.git
