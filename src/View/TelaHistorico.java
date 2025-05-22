@@ -9,8 +9,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Gamer
+ * Tela que exibe o histórico de atividades do usuário logado no sistema Spotifei.
+ * Mostra uma lista com os termos buscados e uma tabela com ações de curtir/descurtir músicas.
+ * 
+ * A tela também possui botão para retornar ao menu principal.
+ * 
+ * @author Leonardo Bezzi Elias
  */
 public class TelaHistorico extends javax.swing.JFrame {
 
@@ -19,13 +23,20 @@ public class TelaHistorico extends javax.swing.JFrame {
     /**
      * Creates new form TelaHistorico
      */
-    
+    /**
+     * Construtor da classe. Inicializa a tela e carrega os dados do histórico.
+     * 
+     * @param idUsuario ID do usuário logado (usado para buscar o histórico no banco)
+     */
     public TelaHistorico(int idUsuario) {
         this.idUsuario = idUsuario;
         initComponents();
         carregarHistoricos();
     }
-    
+    /**
+     * Carrega e exibe os históricos de busca e curtidas/descurtidas do usuário.
+     * Utiliza os métodos dos controllers para obter os dados e os insere nos componentes da interface.
+     */
     private void carregarHistoricos() { //Carrega os históricos
         List<String> buscas = Controller.HistoricoController.getHistoricoBuscas(idUsuario);
         DefaultListModel<String> modelBuscas = new DefaultListModel<>();
@@ -146,16 +157,20 @@ public class TelaHistorico extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Evento acionado ao clicar no botão "Voltar".
+     * Redireciona o usuário de volta para a tela principal.
+     * 
+     * @param evt Evento de clique
+     */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         new TelaPrincipal(Model.Sessao.getUsuario()).setVisible(true); // Abre o menu principal
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
+    // O método main não é utilizado diretamente nessa tela pois ela depende do ID do usuário logado.
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVoltar;

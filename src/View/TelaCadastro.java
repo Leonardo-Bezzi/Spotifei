@@ -9,13 +9,18 @@ import Model.Usuario;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author uniflelias
+ * Tela de cadastro de novos usuários para o sistema Spotifei.
+ * Permite que o usuário informe nome, email e senha, 
+ * e envia os dados para persistência no banco de dados através do UsuarioDAO.
+ * Também possui botão para redirecionar à tela de login.
+ * 
+ * @author Leonardo Bezzi Elias
  */
 public class TelaCadastro extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaCadastro
+     * Construtor da tela de cadastro.
+     * Inicializa os componentes da interface gráfica.
      */
     public TelaCadastro() {
         initComponents();
@@ -155,7 +160,14 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void tfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfNomeActionPerformed
-
+  
+    /**
+     * Ação executada ao clicar no botão "Cadastrar".
+     * Valida os campos, cria um novo usuário e tenta cadastrá-lo via DAO.
+     * Exibe mensagens de sucesso ou erro conforme o resultado.
+     * 
+     * @param evt Evento de clique no botão
+     */
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         //Cadastra (nao dá pra criar usuario vazio)
         String nome = tfNome.getText().trim();
@@ -192,14 +204,22 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void pfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pfSenhaActionPerformed
-
+    
+    /**
+     * Ação executada ao clicar no botão "Fazer Login".
+     * Redireciona o usuário para a tela de login e fecha a tela atual.
+     * 
+     * @param evt Evento de clique no botão
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         new TelaLogin().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Método principal. Inicia a tela de cadastro.
+     * 
+     * @param args argumentos da linha de comando (não utilizados)
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

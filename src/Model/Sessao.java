@@ -5,16 +5,31 @@
 package Model;
 
 /**
- *
- * @author uniflelias
+ * Classe que gerencia a sessão do usuário atualmente logado no sistema.
+ * Permite armazenar e recuperar o usuário que está utilizando o aplicativo no momento.
+ * 
+ * @author Leonardo Bezzi Elias
  */
-public class Sessao { //Usei para registrar o usuario que está usando o app no momento
+public class Sessao {
+    /**
+     * Usuário que está logado na sessão atual.
+     */
     private static Usuario usuarioLogado;
 
+    /**
+     * Define o usuário que está logado na sessão.
+     * 
+     * @param user o usuário a ser definido como logado
+     */
     public static void setUsuario(Usuario user) {
         usuarioLogado = user;
     }
 
+    /**
+     * Retorna o usuário atualmente logado na sessão.
+     * 
+     * @return o usuário logado, ou null se ninguém estiver logado
+     */
     public static Usuario getUsuario() {
         return usuarioLogado;
     }

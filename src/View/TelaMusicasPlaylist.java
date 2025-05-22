@@ -10,8 +10,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Gamer
+ * Tela que exibe as músicas contidas em uma playlist específica do usuário.
+ * Permite adicionar ou remover músicas da playlist.
+ * Cada linha da tabela representa uma música com informações básicas como nome, artista, gênero, duração e curtida.
+ * 
+ * @author Leonardo Bezzi Elias
  */
 public class TelaMusicasPlaylist extends javax.swing.JFrame {
 
@@ -19,7 +22,10 @@ public class TelaMusicasPlaylist extends javax.swing.JFrame {
     private int idUsuario;
 
     /**
-     * Creates new form TelaMusicasPlaylist
+     * Construtor da tela que recebe o ID da playlist e o ID do usuário logado.
+     *
+     * @param idPlaylist ID da playlist selecionada.
+     * @param idUsuario  ID do usuário logado.
      */
     public TelaMusicasPlaylist(int idPlaylist, int idUsuario) {
         initComponents();
@@ -27,8 +33,11 @@ public class TelaMusicasPlaylist extends javax.swing.JFrame {
         this.idUsuario = idUsuario;
         carregarMusicas();
     }
-    
-    private void carregarMusicas() { //Carrega as musicas da playlist (tive que sorescrever a editabilidade das colunas para manter a simplicidade)
+    /**
+     * Carrega todas as músicas da playlist atual na tabela da interface.
+     * Usa o MusicaDAO para buscar as músicas associadas ao usuário e à playlist.
+     */
+    private void carregarMusicas() {
         MusicaDAO dao = new MusicaDAO();
         List<Musica> musicas = dao.listarPorPlaylist(idPlaylist, idUsuario);
 
@@ -195,12 +204,18 @@ public class TelaMusicasPlaylist extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Evento do botão "Voltar".
+     * Retorna para a tela de visualização de playlists.
+     */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         new TelaPlaylists(idUsuario).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
-
+    /**
+     * Evento do botão "Adicionar música".
+     * Solicita ao usuário o ID da música e tenta adicioná-la à playlist.
+     */
     private void btnAdicionarMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarMusicaActionPerformed
         //Adiciona a musica na playlist
         String input = JOptionPane.showInputDialog(this, "Digite o ID da música para adicionar à playlist:");
@@ -220,7 +235,10 @@ public class TelaMusicasPlaylist extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnAdicionarMusicaActionPerformed
-
+    /**
+     * Evento do botão "Remover música".
+     * Solicita ao usuário o ID da música e tenta removê-la da playlist.
+     */
     private void btnRemoverMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverMusicaActionPerformed
         //Remove a musica na playlist
         String input = JOptionPane.showInputDialog(this, "Digite o ID da música para remover da playlist:");
@@ -241,9 +259,6 @@ public class TelaMusicasPlaylist extends javax.swing.JFrame {
         }  
     }//GEN-LAST:event_btnRemoverMusicaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

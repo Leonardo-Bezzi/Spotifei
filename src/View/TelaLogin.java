@@ -9,13 +9,21 @@ import Model.Usuario;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author uniflelias
+ * Tela responsável pelo login do usuário no sistema Spotifei.
+ * Permite ao usuário inserir seu e-mail e senha para autenticação.
+ * Também fornece acesso à tela de cadastro para novos usuários.
+ * 
+ * Autenticação é feita por meio do `UsuarioDAO`.
+ * 
+ * Após autenticação bem-sucedida, redireciona para a `TelaPrincipal`.
+ * Caso contrário, exibe mensagem de erro.
+ * 
+ * @author Leonardo Bezzi Elias
  */
 public class TelaLogin extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaLogin
+     * Construtor padrão que inicializa a interface da tela de login.
      */
     public TelaLogin() {
         initComponents();
@@ -137,7 +145,11 @@ public class TelaLogin extends javax.swing.JFrame {
     private void pfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pfSenhaActionPerformed
-
+    /**
+     * Evento de clique no botão "Entrar".
+     * Realiza a autenticação do usuário e abre a tela principal caso os dados estejam corretos.
+     * Caso contrário, exibe uma mensagem de erro.
+     */
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         //Realiza o login
         String email = tfEmail.getText();
@@ -154,17 +166,21 @@ public class TelaLogin extends javax.swing.JFrame {
                 "Email ou senha incorretos.",
                 "Erro de login",
                 JOptionPane.ERROR_MESSAGE);
-}
-
+        }
     }//GEN-LAST:event_btnEntrarActionPerformed
-
+    
+    /**
+     * Evento de clique no botão "Fazer Cadastro".
+     * Abre a tela de cadastro de novo usuário.
+     */
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         new TelaCadastro().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Método principal da aplicação.
+     * Define o look and feel e inicia a tela de login.
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

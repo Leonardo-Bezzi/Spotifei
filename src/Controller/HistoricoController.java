@@ -11,11 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Gamer
+ * Controlador responsável por gerenciar o histórico de interações do usuário,
+ * como buscas realizadas e músicas curtidas.
+ * Conecta-se ao banco de dados para registrar e recuperar informações.
+ * 
+ * @author Leonardo Bezzi Elias
  */
 public class HistoricoController {
-    
+    /**
+     * Registra uma busca realizada pelo usuário no banco de dados.
+     *
+     * @param idUsuario   o ID do usuário que realizou a busca
+     * @param termoBusca  o termo buscado pelo usuário
+     */
     public static void registrarBusca(int idUsuario, String termoBusca) { //Registra na table a pesquisa feita
         String sql = "INSERT INTO historico_buscas (id_usuario, termo_busca) VALUES (?, ?)";
 
@@ -30,7 +38,13 @@ public class HistoricoController {
             e.printStackTrace();
         }
     }
-    
+    /**
+     * Registra uma curtida ou descurtida de uma música por um usuário.
+     *
+     * @param idUsuario  o ID do usuário
+     * @param idMusica   o ID da música
+     * @param curtida    valor booleano indicando se foi curtida (true) ou descurtida (false)
+     */
     public static void registrarCurtida(int idUsuario, int idMusica, boolean curtida) { //Registra na table as curtidas
         String sql = "INSERT INTO historico_curtidas (id_usuario, id_musica, curtida) VALUES (?, ?, ?)";
 
@@ -48,7 +62,12 @@ public class HistoricoController {
         }
     }
 
-
+    /**
+     * Retorna o histórico de buscas realizadas por um usuário.
+     *
+     * @param idUsuario  o ID do usuário
+     * @return uma lista de termos de busca registrados
+     */
     public static List<String> getHistoricoBuscas(int idUsuario) { //Pega historico de buscas para uso
         List<String> historicoBuscas = new ArrayList<>();
         String sql = "SELECT termo_busca FROM historico_buscas WHERE id_usuario = ?";

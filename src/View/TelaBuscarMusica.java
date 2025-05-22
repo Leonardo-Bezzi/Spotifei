@@ -6,22 +6,27 @@ package View;
 
 import Model.DAOs.MusicaDAO;
 import Model.Musica;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author uniflelias
+ * Tela de interface gráfica que permite ao usuário buscar músicas
+ * com base em filtros como nome, artista ou gênero.
+ * Também permite curtir ou descurtir músicas diretamente da tabela.
+ * 
+ * Esta tela é acessível após o login e utiliza a camada DAO para acesso ao banco de dados.
+ * 
+ * @author Leonardo Bezzi Elias
  */
 public class TelaBuscarMusica extends javax.swing.JFrame {
-
-    /**
-     * Creates new form TelaBuscarMusica
-     */
     
     private int idUsuario;
     
+    /**
+     * Construtor que inicializa os componentes da tela e registra o ouvinte para ações na tabela.
+     * 
+     * @param idUsuario o ID do usuário atualmente logado
+     */
     public TelaBuscarMusica(int idUsuario) { //Gerencia os dados
         initComponents();
         this.idUsuario = idUsuario;
@@ -175,9 +180,16 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
     private void tfTermoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTermoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfTermoActionPerformed
-
+    
+    /**
+     * Método chamado ao clicar no botão "Buscar".
+     * Realiza a consulta no banco de dados com base no filtro e termo informados.
+     * Preenche a tabela com os resultados encontrados.
+     * 
+     * @param evt o evento de clique no botão
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        //Faz a usca de acordo com o filtro selecionado
+        //Faz a busca de acordo com o filtro selecionado
         String termo = tfTermo.getText();
         String filtro = cbFiltro.getSelectedItem().toString().toLowerCase();
 
@@ -209,15 +221,19 @@ public class TelaBuscarMusica extends javax.swing.JFrame {
     private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
      
     }//GEN-LAST:event_cbFiltroActionPerformed
-
+    
+    /**
+     * Método chamado ao clicar no botão "Voltar".
+     * Fecha a tela atual e retorna à tela principal do usuário.
+     * 
+     * @param evt o evento de clique no botão
+     */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         new TelaPrincipal(Model.Sessao.getUsuario()).setVisible(true); // Abre o menu principal
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    // O método main não é utilizado diretamente nessa tela pois ela depende do ID do usuário logado.
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

@@ -10,26 +10,31 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 /**
- *
- * @author Gamer
+ * Tela de gerenciamento das playlists do usuário no Spotifei.
+ * Permite criar, renomear, excluir e visualizar músicas de playlists.
+ * 
+ * @author Leonardo Bezzi Elias
  */
 public class TelaPlaylists extends javax.swing.JFrame {
 
     private int idUsuario;
 
     /**
-     * Creates new form TelaPlaylists
+     * Construtor da tela de playlists.
+     * 
+     * @param idUsuario ID do usuário logado no sistema.
      */
     public TelaPlaylists(int idUsuario) {
         initComponents();
         this.idUsuario = idUsuario;
         carregarPlaylists();
     }
-
+    /**
+     * Carrega e exibe as playlists associadas ao usuário logado.
+     */
     private void carregarPlaylists() { //Lista as playlists do usuario
         PlaylistDAO dao = new PlaylistDAO();
         List<Playlist> playlists = dao.listarPorUsuario(idUsuario);
@@ -40,31 +45,59 @@ public class TelaPlaylists extends javax.swing.JFrame {
         }
         listaPlaylists.setModel(model);
     }
-
+    /**
+     * Retorna o botão "Criar playlist".
+     * 
+     * @return JButton btnCriar
+     */
     public JButton getBtnCriar() {
         return btnCriar;
     }
-
+    /**
+     * Retorna o botão "Renomear playlist".
+     * 
+     * @return JButton btnEditar
+     */
     public JButton getBtnEditar() {
         return btnEditar;
     }
-
+    /**
+     * Retorna o botão "Excluir playlist".
+     * 
+     * @return JButton btnExcluir
+     */
     public JButton getBtnExcluir() {
         return btnExcluir;
     }
-
+    /**
+     * Retorna o botão "Ver músicas".
+     * 
+     * @return JButton btnVerMusicas
+     */
     public JButton getBtnVerMusicas() {
         return btnVerMusicas;
     }
-
+    /**
+     * Retorna o botão "Voltar".
+     * 
+     * @return JButton btnVoltar
+     */
     public JButton getBtnVoltar() {
         return btnVoltar;
     }
-
+    /**
+     * Retorna o JScrollPane da lista de playlists.
+     * 
+     * @return JScrollPane jScrollPane1
+     */
     public JScrollPane getjScrollPane1() {
         return jScrollPane1;
     }
-
+    /**
+     * Retorna a JList que exibe os nomes das playlists.
+     * 
+     * @return JList listaPlaylists
+     */
     public JList<String> getListaPlaylists() {
         return listaPlaylists;
     }
@@ -215,7 +248,11 @@ public class TelaPlaylists extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Cria uma nova playlist com o nome fornecido pelo usuário.
+     * 
+     * @param evt Evento de clique no botão "Criar playlist"
+     */
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
         //Cria uma nova playlist
         String nome = javax.swing.JOptionPane.showInputDialog(this, "Digite o nome da nova playlist:");
@@ -238,7 +275,11 @@ public class TelaPlaylists extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Nome da playlist não pode ser vazio.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnCriarActionPerformed
-
+    /**
+     * Renomeia a playlist selecionada com um novo nome informado pelo usuário.
+     * 
+     * @param evt Evento de clique no botão "Renomear playlist"
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         //Edita o nome da playlist
         int indiceSelecionado = listaPlaylists.getSelectedIndex();
@@ -268,7 +309,11 @@ public class TelaPlaylists extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Nome da playlist não pode ser vazio.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
-
+    /**
+     * Exclui a playlist selecionada após confirmação do usuário.
+     * 
+     * @param evt Evento de clique no botão "Excluir playlist"
+     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         //Remove a playlit selecionada
         int selectedIndex = listaPlaylists.getSelectedIndex();
@@ -291,7 +336,11 @@ public class TelaPlaylists extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
-
+    /**
+     * Abre a tela para visualizar e gerenciar músicas da playlist selecionada.
+     * 
+     * @param evt Evento de clique no botão "Ver músicas"
+     */
     private void btnVerMusicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMusicasActionPerformed
         //Leva a tela de manipulação das musicas da playlist selecionada
         int indiceSelecionado = listaPlaylists.getSelectedIndex();
@@ -309,7 +358,11 @@ public class TelaPlaylists extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_btnVerMusicasActionPerformed
-
+    /**
+     * Retorna à tela principal do sistema.
+     * 
+     * @param evt Evento de clique no botão "Voltar"
+     */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         new TelaPrincipal(Model.Sessao.getUsuario()).setVisible(true); // Abre o menu principal
         this.dispose();

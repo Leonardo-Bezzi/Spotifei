@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model.DAOs;
 
 import Model.Conexao;
@@ -15,11 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Gamer
+ * DAO para operações relacionadas a Playlists.
+ * Fornece métodos para criar, listar, renomear e excluir playlists,
+ * além de listar músicas dentro de uma playlist, com informação de curtidas do usuário.
+ * 
+ * @author Leonardo Bezzi Elias
  */
 public class PlaylistDAO {
-    public List<Playlist> listarPorUsuario(int idUsuario) {  //Lista as playlists do user logado
+
+    /**
+     * Lista todas as playlists de um usuário.
+     * 
+     * @param idUsuario ID do usuário dono das playlists
+     * @return Lista de playlists pertencentes ao usuário
+     */
+    public List<Playlist> listarPorUsuario(int idUsuario) {
         List<Playlist> playlists = new ArrayList<>();
         String sql = "SELECT id, nome FROM playlists WHERE usuario_id = ?";
 
@@ -42,8 +48,14 @@ public class PlaylistDAO {
 
         return playlists;
     }
-    
-    public boolean criarPlaylist(Playlist playlist) {  //Cria uma nova playlist
+
+    /**
+     * Cria uma nova playlist para o usuário.
+     * 
+     * @param playlist Objeto Playlist com nome e usuário setados
+     * @return true se a criação foi bem sucedida, false caso contrário
+     */
+    public boolean criarPlaylist(Playlist playlist) {
         String sql = "INSERT INTO playlists (nome, usuario_id) VALUES (?, ?)";
 
         try (Connection conn = Conexao.getConnection();
@@ -57,7 +69,7 @@ public class PlaylistDAO {
             if (linhasAfetadas > 0) {
                 ResultSet rs = pst.getGeneratedKeys();
                 if (rs.next()) {
-                    playlist.setId(rs.getInt(1)); // opcional: pega o ID gerado
+                    playlist.setId(rs.getInt(1)); // captura o ID gerado
                 }
                 return true;
             } else {
@@ -70,7 +82,13 @@ public class PlaylistDAO {
         }
     }
 
-    public boolean excluirPlaylist(int idPlaylist) {  //Exclui a playlist selecionada
+    /**
+     * Exclui uma playlist pelo seu ID.
+     * 
+     * @param idPlaylist ID da playlist a ser excluída
+     * @return true se a exclusão foi bem sucedida, false caso contrário
+     */
+    public boolean excluirPlaylist(int idPlaylist) {
         String sql = "DELETE FROM playlists WHERE id = ?";
         try (Connection conn = Conexao.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -84,8 +102,14 @@ public class PlaylistDAO {
             return false;
         }
     }
-    
-    public boolean renomearPlaylist(Playlist playlist) {  //Renomeia a playlist selecionada
+
+    /**
+     * Renomeia uma playlist existente.
+     * 
+     * @param playlist Objeto Playlist com o ID e novo nome setados
+     * @return true se o renomear foi bem sucedido, false caso contrário
+     */
+    public boolean renomearPlaylist(Playlist playlist) {
         String sql = "UPDATE playlists SET nome = ? WHERE id = ?";
         try (Connection conn = Conexao.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -99,22 +123,38 @@ public class PlaylistDAO {
         }
     }
 
-    public List<Musica> listarMusicasPorPlaylist(int idPlaylist) { //Lista as musicas da playlist
+    /**
+     * Lista as músicas de uma playlist, incluindo se cada música está curtida pelo usuário.
+     * 
+     * @param idPlaylist ID da playlist
+     * @param idUsuario  ID do usuário para verificar curtidas
+     * @return Lista de músicas pertencentes à playlist com estado de curtida
+     */
+    public List<Musica> listarMusicasPorPlaylist(int idPlaylist, int idUsuario) {
         List<Musica> musicas = new ArrayList<>();
-        String sql = "SELECT m.id, m.nome, m.duracao, m.genero FROM musicas m "
-                   + "JOIN playlist_musicas pm ON m.id = pm.id_musica WHERE pm.id_playlist = ?";
+        String sql = """
+            SELECT m.*, 
+                   CASE WHEN c.id_musica IS NOT NULL THEN true ELSE false END AS curtida
+            FROM musicas m
+            JOIN playlist_musicas pm ON m.id = pm.musica_id
+            LEFT JOIN curtidas c ON m.id = c.id_musica AND c.id_usuario = ?
+            WHERE pm.playlist_id = ?
+        """;
 
         try (Connection conn = Conexao.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, idPlaylist);
+            ps.setInt(1, idUsuario);
+            ps.setInt(2, idPlaylist);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 Musica m = new Musica();
                 m.setId(rs.getInt("id"));
                 m.setNome(rs.getString("nome"));
-                m.setDuracao(rs.getInt("duracao"));
+                m.setArtista(rs.getString("artista"));
                 m.setGenero(rs.getString("genero"));
+                m.setDuracao(rs.getInt("duracao"));
+                m.setCurtida(rs.getBoolean("curtida"));
                 musicas.add(m);
             }
         } catch (SQLException e) {
@@ -122,6 +162,4 @@ public class PlaylistDAO {
         }
         return musicas;
     }
-
-    
 }

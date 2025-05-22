@@ -12,11 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Gamer
+ * Controllador que obtém o histórico de curtidas de músicas do usuário
+ * Utiliza o banco de dados para buscar informações da tabela de histórico
+ * 
+ * @author Leonardo Bezzi Elias
  */
 public class CurtidasController {
-
+    /**
+     * Retorna o histórico de curtidas e descurtidas realizadas por um usuário.
+     * Cada item do histórico inclui o nome da música e se foi curtida ou não.
+     *
+     * @param idUsuario o ID do usuário cujo histórico será recuperado
+     * @return uma lista de objetos CurtidaInfo com o nome da música e o estado da curtida
+     */
     public static List<CurtidaInfo> getHistoricoCurtidas(int idUsuario) { //Pega o historico de curtidas para uso
         List<CurtidaInfo> historicoCurtidas = new ArrayList<>();
         String sql = "SELECT m.nome, c.curtida FROM historico_curtidas c JOIN musicas m ON c.id_musica = m.id WHERE c.id_usuario = ?";

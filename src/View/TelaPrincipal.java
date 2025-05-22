@@ -8,23 +8,33 @@ import javax.swing.JOptionPane;
 import Model.Usuario;
 
 /**
- *
- * @author uniflelias
+ * Tela principal do sistema Spotifei.
+ * Exibe opções para pesquisa de músicas, gerenciamento de playlists e visualização do histórico.
+ * Exibe uma saudação ao usuário logado.
+ * 
+ * @author Leonardo Bezzi Elias
  */
 
 public class TelaPrincipal extends javax.swing.JFrame {
-    
+    /**
+     * Controle para mostrar a mensagem de boas-vindas apenas uma vez.
+     */
     private static boolean mensagemMostrada = false;
     
     /**
-     * Construtor padrão (caso queira abrir sem login)
+     * Construtor padrão da tela principal.
+     * Usado quando a tela é aberta sem um usuário logado.
      */
     public TelaPrincipal() {
         initComponents();
     }
 
     /**
-     * Construtor que recebe o usuário e exibe uma saudação no título
+     * Construtor da tela principal que recebe o usuário logado.
+     * Atualiza o título da janela com a saudação ao usuário.
+     * Mostra uma mensagem de boas-vindas (uma única vez).
+     * 
+     * @param user Usuário logado que acessou o sistema.
      */
     public TelaPrincipal(Usuario user) {
         initComponents();
@@ -120,7 +130,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Ação executada ao clicar no botão "Pesquisa de músicas".
+     * Abre a tela de busca de músicas para o usuário logado.
+     * Exibe mensagem de erro se não houver usuário logado.
+     * 
+     * @param evt Evento do clique no botão.
+     */
     private void btnBuscarMusicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMusicasActionPerformed
         //Leva a tela de busca
         Usuario usuarioLogado = Model.Sessao.getUsuario();
@@ -132,7 +148,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Usuário não está logado!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnBuscarMusicasActionPerformed
-
+    /**
+     * Ação executada ao clicar no botão "Playlists".
+     * Abre a tela de gerenciamento de playlists para o usuário logado.
+     * Exibe mensagem de erro se não houver usuário logado.
+     * 
+     * @param evt Evento do clique no botão.
+     */
     private void btnPlaylistsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistsActionPerformed
         //Leva a tela das playlists
         Usuario usuarioLogado = Model.Sessao.getUsuario();
@@ -144,7 +166,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "Usuário não está logado!", "Erro", JOptionPane.ERROR_MESSAGE);
         } 
     }//GEN-LAST:event_btnPlaylistsActionPerformed
-
+    /**
+     * Ação executada ao clicar no botão "Histórico".
+     * Abre a tela de histórico de atividades para o usuário logado.
+     * Exibe mensagem de erro se não houver usuário logado.
+     * 
+     * @param evt Evento do clique no botão.
+     */
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
         //Leva a pagina de historico
         Usuario usuarioLogado = Model.Sessao.getUsuario();
@@ -157,10 +185,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnHistoricoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
