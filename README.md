@@ -35,8 +35,6 @@ O backup do banco de dados está disponível na raiz do projeto em formato `.bac
 
 ## Como Executar
 
-## Executável
-
 O arquivo `.jar` gerado pode ser encontrado em:
 
 `/executavel/Spotifei.jar`
@@ -58,13 +56,19 @@ ou:
 
 4. Restaure o banco de dados utilizando o arquivo de backup `.backup` no PgAdmin (modo "custom").
 
-5. Execute a classe principal para iniciar o sistema.
+5. Execute a classe principal para iniciar o sistema. (Tive menos problemas executando por esse modo)
 
 ## Observações
 
 - O projeto **não possui reprodução de áudio**.
 - Todo o **histórico de buscas e curtidas/descurtidas** é registrado no banco de dados.
 - A **duração das músicas** é armazenada em **segundos**.
+
+## Relatório
+
+O relatório está no link abaixo:
+
+https://docs.google.com/document/d/1Myvzgzh3_S2YQcZEDXrQQrQED5CQIL9C4ofki9bLTBY/edit?usp=sharing 
 
 ## Autor
 
