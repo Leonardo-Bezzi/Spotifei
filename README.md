@@ -6,7 +6,7 @@ Spotifei é uma plataforma desktop desenvolvida em Java para gerenciamento de m�
 
 - Java (Swing para interface gráfica)
 - JDBC
-- PostgreSQL
+- PostgreSQL 17 (a versão é importante para a compatibilidade)
 - Arquitetura MVC
 - PgAdmin (administração do banco)
 
