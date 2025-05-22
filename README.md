@@ -69,6 +69,7 @@ ou:
 ## Relatório
 
 O relatório está no link abaixo:
+
 https://docs.google.com/document/d/1Myvzgzh3_S2YQcZEDXrQQrQED5CQIL9C4ofki9bLTBY/edit?usp=sharing 
 
 ## Autor
