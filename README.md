@@ -56,7 +56,7 @@ ou:
 
 4. Restaure o banco de dados utilizando o arquivo de backup `.backup` no PgAdmin (modo "custom").
 
-5. Execute a classe principal para iniciar o sistema.
+5. Execute a classe principal para iniciar o sistema. (Tive menos problemas executando por esse modo)
 
 ## Observações
 
