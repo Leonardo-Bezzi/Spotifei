@@ -64,6 +64,10 @@ ou:
 - Todo o **histórico de buscas e curtidas/descurtidas** é registrado no banco de dados.
 - A **duração das músicas** é armazenada em **segundos**.
 
+## JavaDoc
+
+O javadoc está dentro do src
+
 ## Relatório
 
 O relatório está no link abaixo:
