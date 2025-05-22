@@ -66,6 +66,11 @@ ou:
 - Todo o **histórico de buscas e curtidas/descurtidas** é registrado no banco de dados.
 - A **duração das músicas** é armazenada em **segundos**.
 
+## Relatório
+
+O relatório está no link abaixo:
+https://docs.google.com/document/d/1Myvzgzh3_S2YQcZEDXrQQrQED5CQIL9C4ofki9bLTBY/edit?usp=sharing 
+
 ## Autor
 
 Desenvolvido por **Leonardo Bezzi Elias** como parte de um projeto acadêmico da **FEI**.
