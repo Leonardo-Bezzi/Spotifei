@@ -35,8 +35,6 @@ O backup do banco de dados está disponível na raiz do projeto em formato `.bac
 
 ## Como Executar
 
-## Executável
-
 O arquivo `.jar` gerado pode ser encontrado em:
 
 `/executavel/Spotifei.jar`
